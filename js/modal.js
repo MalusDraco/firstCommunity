@@ -20,8 +20,6 @@ function initializeModal() {
   const fileInput = document.getElementById('requestImage');
   const fileName = document.querySelector('.file-name');
   const requestForm = document.querySelector('.request-form');
-  const locationInput = document.getElementById('requestLocation');
-  const locationSearchBtn = document.querySelector('.location-search-btn');
 
   // Show modal when clicking "Submit Request" button
   const submitButton = document.querySelector('.action-card[href="#"]');
@@ -42,31 +40,6 @@ function initializeModal() {
       closeModal();
     }
   };
-
-  // Handle location search
-  if (locationSearchBtn && locationInput) {
-    locationSearchBtn.addEventListener('click', () => {
-      const searchQuery = locationInput.value.trim();
-      if (searchQuery) {
-        // Here you could integrate with a maps API
-        // For now, we'll just open Google Maps in a new tab
-        const searchUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-          searchQuery
-        )}`;
-        window.open(searchUrl, '_blank');
-      } else {
-        locationInput.focus();
-      }
-    });
-
-    // Allow searching by pressing Enter in the location input
-    locationInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault(); // Prevent form submission
-        locationSearchBtn.click();
-      }
-    });
-  }
 
   // Update file name when file is selected
   if (fileInput && fileName) {
