@@ -60,12 +60,13 @@ function initializeModal() {
       const requestData = {
         id: requestId,
         title: formData.get('title'),
+        date: formData.get('date'),
         description: formData.get('description'),
         organization: formData.get('organization'),
         location: formData.get('location'),
         hours: formData.get('hours'),
         status: 'pending',
-        date: new Date().toLocaleDateString('en-US', {
+        submissionDate: new Date().toLocaleDateString('en-US', {
           month: 'short',
           day: 'numeric',
         }),
@@ -119,8 +120,9 @@ function createRequestCard(data) {
         <h3>${data.title}</h3>
         <p>${data.description}</p>
         <div class="request-meta">
-            <span><i class="fas fa-calendar"></i>Requested for ${
-              data.date
+            <span><i class="fas fa-calendar"></i>Event Date: ${data.date}</span>
+            <span><i class="fas fa-clock"></i>Submitted: ${
+              data.submissionDate
             }</span>
             <span><i class="fas fa-building"></i>${data.organization}</span>
             <span><i class="fas fa-map-marker-alt"></i>${data.location}</span>
