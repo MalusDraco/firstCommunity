@@ -65,17 +65,50 @@
 }
 
 .form-group input[type="text"],
+.form-group input[type="date"],
 .form-group textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 6px;
     font-size: 16px;
+    font-family: inherit;
 }
 
-.form-group textarea {
-    height: 100px;
-    resize: vertical;
+.form-group input[type="date"] {
+    position: relative;
+    padding-right: 35px; /* Space for the calendar icon */
+}
+
+.form-group input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.form-group input[type="date"]::-webkit-datetime-edit {
+    padding: 0;
+}
+
+.form-group input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+}
+
+/* Ensure consistent date format display */
+.form-group input[type="date"]::-webkit-datetime-edit-year-field {
+    padding-right: 2px;
+}
+
+.form-group input[type="date"]::-webkit-datetime-edit-month-field,
+.form-group input[type="date"]::-webkit-datetime-edit-day-field {
+    padding: 0 2px;
+}
+
+.form-group input[type="date"]::-webkit-datetime-edit-text {
+    padding: 0;
+    color: var(--retro-text);
 }
 
 .file-upload {
@@ -231,4 +264,39 @@ input[type="date"]::-webkit-datetime-edit-year-field {
 /* Style when date is not selected */
 input[type="date"]:invalid::-webkit-datetime-edit {
     color: #666;
+}
+
+/* Location Input Styling */
+.location-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.location-input-container input[type="text"] {
+    flex: 1;
+}
+
+.location-search-btn {
+    background-color: var(--retro-primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    min-width: 40px;
+    height: 40px;
+}
+
+.location-search-btn:hover {
+    background-color: #cc0099;
+}
+
+.location-search-btn i {
+    font-size: 16px;
 } 

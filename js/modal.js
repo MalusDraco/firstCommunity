@@ -20,6 +20,8 @@ function initializeModal() {
   const fileInput = document.getElementById('requestImage');
   const fileName = document.querySelector('.file-name');
   const requestForm = document.querySelector('.request-form');
+  const locationInput = document.getElementById('requestLocation');
+  const locationSearchBtn = document.querySelector('.location-search-btn');
 
   // Show modal when clicking "Submit Request" button
   const submitButton = document.querySelector('.action-card[href="#"]');
@@ -41,6 +43,31 @@ function initializeModal() {
     }
   };
 
+  // Handle location search
+  if (locationSearchBtn && locationInput) {
+    locationSearchBtn.addEventListener('click', () => {
+      const searchQuery = locationInput.value.trim();
+      if (searchQuery) {
+        // Here you could integrate with a maps API
+        // For now, we'll just open Google Maps in a new tab
+        const searchUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+          searchQuery
+        )}`;
+        window.open(searchUrl, '_blank');
+      } else {
+        locationInput.focus();
+      }
+    });
+
+    // Allow searching by pressing Enter in the location input
+    locationInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault(); // Prevent form submission
+        locationSearchBtn.click();
+      }
+    });
+  }
+
   // Update file name when file is selected
   if (fileInput && fileName) {
     fileInput.addEventListener('change', (e) => {
@@ -57,19 +84,29 @@ function initializeModal() {
       // Get form data
       const formData = new FormData(requestForm);
       const requestId = generateUniqueId();
+
+      // Format the date as YYYY/MM/DD
+      const dateInput = formData.get('date');
+      const formattedDate = dateInput
+        ? new Date(dateInput)
+            .toLocaleDateString('en-CA', {
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+            })
+            .replace(/-/g, '/')
+        : '';
+
       const requestData = {
         id: requestId,
         title: formData.get('title'),
-        date: formData.get('date'),
+        date: formattedDate,
         description: formData.get('description'),
         organization: formData.get('organization'),
         location: formData.get('location'),
         hours: formData.get('hours'),
         status: 'pending',
-        submissionDate: new Date().toLocaleDateString('en-US', {
-          month: 'short',
-          day: 'numeric',
-        }),
+        submissionDate: new Date().toISOString(),
       };
 
       // Handle image file
@@ -112,18 +149,22 @@ function createRequestCard(data) {
   card.className = 'request-card';
   card.setAttribute('data-request-id', data.id);
 
-  // Determine request type based on title/keywords
-  const requestType = determineRequestType(data.title);
+  // Format the submission date from ISO string to MM-DD-YYYY
+  const submissionDate = new Date(data.submissionDate).toLocaleDateString(
+    'en-US',
+    {
+      month: '2-digit',
+      day: '2-digit',
+      year: 'numeric',
+    }
+  );
 
   card.innerHTML = `
-        <span class="request-type ${requestType}">${requestType}</span>
         <h3>${data.title}</h3>
         <p>${data.description}</p>
         <div class="request-meta">
             <span><i class="fas fa-calendar"></i>Event Date: ${data.date}</span>
-            <span><i class="fas fa-clock"></i>Submitted: ${
-              data.submissionDate
-            }</span>
+            <span><i class="fas fa-clock"></i>Submitted: ${submissionDate}</span>
             <span><i class="fas fa-building"></i>${data.organization}</span>
             <span><i class="fas fa-map-marker-alt"></i>${data.location}</span>
             <span><i class="fas fa-clock"></i>${data.hours}</span>
@@ -135,7 +176,7 @@ function createRequestCard(data) {
     `;
 
   // Add click event to view request details
-  card.style.cursor = 'pointer'; // Make it clear it's clickable
+  card.style.cursor = 'pointer';
   card.addEventListener('click', (e) => {
     e.preventDefault();
     window.location.href = `request-details.html?id=${data.id}`;
@@ -163,22 +204,8 @@ function getStatusIcon(status) {
 
 // Helper function to capitalize first letter
 function capitalizeFirstLetter(string) {
+  if (!string) return '';
   return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-// Function to determine request type
-function determineRequestType(title) {
-  const titleLower = title.toLowerCase();
-  if (titleLower.includes('emergency') || titleLower.includes('urgent')) {
-    return 'emergency';
-  } else if (
-    titleLower.includes('training') ||
-    titleLower.includes('workshop')
-  ) {
-    return 'training';
-  } else {
-    return 'safety';
-  }
 }
 
 // Load modal component and initialize functionality
