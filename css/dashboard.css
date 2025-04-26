@@ -35,9 +35,9 @@ p, span, a, button {
 
 /* Sidebar Styles */
 .sidebar {
-    width: 260px;
+    width: 300px;
     background-color: var(--retro-primary);
-    height: 100vh;
+    height: auto;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -639,11 +639,6 @@ p, span, a, button {
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
-    .sidebar {
-        width: 200px;
-    }
-}
 
 @media (max-width: 768px) {
     .dashboard-body {
