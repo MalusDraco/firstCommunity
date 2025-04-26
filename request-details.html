@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Details - First Responder App</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .request-details-container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .back-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
+            color: #333;
+            text-decoration: none;
+            margin-bottom: 2rem;
+        }
+
+        .request-title {
+            font-family: 'Tangerine';
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .request-image {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            background-color: #f0f0f0;
+            margin-bottom: 2rem;
+            object-fit: cover;
+        }
+
+        .request-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .info-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .organization-name {
+            font-size: 2rem;
+            color: #800080;
+            margin-bottom: 1rem;
+        }
+
+        .description-title {
+            font-size: 1.5rem;
+            color: #800080;
+            margin-bottom: 1rem;
+        }
+
+        .description-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .location-section {
+            margin-top: 2rem;
+        }
+
+        .location-title {
+            font-size: 2rem;
+            color: #800080;
+            margin-bottom: 1rem;
+        }
+
+        .location-map {
+            width: 100%;
+            height: 300px;
+            background-color: #f0f0f0;
+            margin-top: 1rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .status-pending {
+            background-color: #ffd700;
+            color: #333;
+        }
+
+        .status-approved {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .status-emergency {
+            background-color: #ff4444;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="dashboard-body">
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/logo.svg" alt="First Responder Logo" class="logo">
+            <h2>Community Portal</h2>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="community.html"><i class="fas fa-home"></i>Dashboard</a>
+            </li>
+            <li class="active">
+                <a href="#"><i class="fas fa-calendar-alt"></i>My Requests</a>
+            </li>
+            <li>
+                <a href="#"><i class="fas fa-hands-helping"></i>Volunteer</a>
+            </li>
+            <li>
+                <a href="#"><i class="fas fa-bell"></i>Notifications</a>
+            </li>
+            <li>
+                <a href="#"><i class="fas fa-user"></i>Profile</a>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <a href="#" class="logout">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
+        </div>
+    </nav>
+
+    <main class="dashboard-main">
+        <div class="request-details-container">
+            <a href="community.html" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+                Back to Dashboard
+            </a>
+
+            <h1 id="requestTitle" class="request-title">Event</h1>
+
+            <div class="request-info">
+                <div class="info-section">
+                    <img id="requestImage" class="request-image" src="" alt="Request Image">
+                    <h2 id="organizationName" class="organization-name">Organization name</h2>
+                    <div id="requestStatus" class="status-badge status-pending">
+                        <i class="fas fa-clock"></i>
+                        Pending
+                    </div>
+                    <h3 class="description-title">Description:</h3>
+                    <p id="requestDescription" class="description-content"></p>
+                </div>
+
+                <div class="info-section">
+                    <div class="location-section">
+                        <h2 class="location-title">Location</h2>
+                        <p id="requestLocation"></p>
+                        <div id="locationMap" class="location-map"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/request-details.js"></script>
+</body>
+
+</html>
