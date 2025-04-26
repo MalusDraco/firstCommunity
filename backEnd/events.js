@@ -15,6 +15,10 @@ async function test() {
         await insertEMTEvent("testDesc", "path/testPic", "testTitle", "testAddr", 1, 1, "2025-04-25", "testTime", "testOrg");
         let arr = await getEMTEvents();
         console.log(arr)
+
+        console.log("==========================")
+
+        await deleteDone();
     } catch (e) {
         console.error(e);
     } finally {
@@ -32,7 +36,7 @@ async function getEMTEvents() {
 async function insertEMTEvent(desc, pic, title, addr, long, lat, date, time, org) {
     const db = client.db("events");
     const events = db.collection("EMT");
-    date = new Date(date);
+    date = new Date(date).toISOString();
 
     const doc = {
         "description": desc,
@@ -58,7 +62,7 @@ async function getFireEvents() {
 async function insertFireEvent(desc, pic, title, addr, long, lat, date, time, org) {
     const db = client.db("events");
     const events = db.collection("Fire");
-    date = new Date(date);
+    date = new Date(date).toISOString();
 
     const doc = {
         "description": desc,
@@ -84,7 +88,7 @@ async function getPoliceEvents() {
 async function insertPoliceEvent(desc, pic, title, addr, long, lat, date, time, org) {
     const db = client.db("events");
     const events = db.collection("Police");
-    date = new Date(date);
+    date = new Date(date).toISOString();
 
     const doc = {
         "description": desc,
@@ -110,7 +114,7 @@ async function getCommunityEvents() {
 async function insertCommunityEvent(desc, pic, title, addr, long, lat, date, time, org) {
     const db = client.db("events");
     const events = db.collection("Community");
-    date = new Date(date);
+    date = new Date(date).toISOString();
 
     const doc = {
         "description": desc,
@@ -132,7 +136,7 @@ async function deleteDone() {
 
     let currDate = new Date().toISOString();
 
-    let result = await events.deleteMany({date: {$lt: `ISODate( ${currDate} )` }});
+    let result = await events.deleteMany( {date: {$lt: currDate } } );
     console.log(result);
 
 }
