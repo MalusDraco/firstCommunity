@@ -10,9 +10,9 @@ try {
     process.exit(1);
 }
 
-async function main() {
+async function test() {
     try {
-        await insertEMTEvent("testDesc", "path/testPic", "testTitle", "testAddr", 1, 1, "testDate", "testTime", "testOrg");
+        await insertEMTEvent("testDesc", "path/testPic", "testTitle", "testAddr", 1, 1, "2025-04-25", "testTime", "testOrg");
         let arr = await getEMTEvents();
         console.log(arr)
     } catch (e) {
@@ -32,6 +32,7 @@ async function getEMTEvents() {
 async function insertEMTEvent(desc, pic, title, addr, long, lat, date, time, org) {
     const db = client.db("events");
     const events = db.collection("EMT");
+    date = new Date(date);
 
     const doc = {
         "description": desc,
@@ -57,6 +58,7 @@ async function getFireEvents() {
 async function insertFireEvent(desc, pic, title, addr, long, lat, date, time, org) {
     const db = client.db("events");
     const events = db.collection("Fire");
+    date = new Date(date);
 
     const doc = {
         "description": desc,
@@ -82,13 +84,14 @@ async function getPoliceEvents() {
 async function insertPoliceEvent(desc, pic, title, addr, long, lat, date, time, org) {
     const db = client.db("events");
     const events = db.collection("Police");
+    date = new Date(date);
 
     const doc = {
         "description": desc,
         "picture": pic,
         "title": title,
         "location": [{"address": addr, "long": long, "lat": lat}],
-        "date": date,
+        "date": date, // YYYY-MM-DD
         "time": time,
         "organization": org
     }
@@ -97,4 +100,15 @@ async function insertPoliceEvent(desc, pic, title, addr, long, lat, date, time, 
     console.log(result);
 }
 
-main().catch(console.error);
+async function deleteDone() {
+    const db = client.db('events');
+    const events = db.collection("EMT");
+
+    let currDate = new Date().toISOString();
+
+    let result = await events.deleteMany({date: {$lt: `ISODate( ${currDate} )` }});
+    console.log(result);
+
+}
+
+test().catch(console.error);
