@@ -316,6 +316,8 @@ p, span, a, button {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     border: 2px solid var(--retro-primary);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .request-card:hover {
