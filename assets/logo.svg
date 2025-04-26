@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background Circle -->
+    <circle cx="100" cy="100" r="90" fill="#F600C3" stroke="#FFE135" stroke-width="4"/>
+    
+    <!-- Inner Circle -->
+    <circle cx="100" cy="100" r="75" fill="none" stroke="#FFE135" stroke-width="2"/>
+    
+    <!-- Cross Symbol -->
+    <g transform="translate(100, 100)">
+        <!-- Vertical Line -->
+        <rect x="-8" y="-40" width="16" height="80" fill="#FFE135" rx="4"/>
+        <!-- Horizontal Line -->
+        <rect x="-40" y="-8" width="80" height="16" fill="#FFE135" rx="4"/>
+    </g>
+    
+    <!-- Outer Ring -->
+    <circle cx="100" cy="100" r="85" fill="none" stroke="#FFE135" stroke-width="2" stroke-dasharray="4 4"/>
+    
+    <!-- Text Elements -->
+    <text x="100" y="160" text-anchor="middle" fill="#FFE135" font-family="VT323, monospace" font-size="24" font-weight="bold">
+        FIRST RESPONDER
+    </text>
+    
+    <!-- Decorative Elements -->
+    <g transform="translate(100, 100)">
+        <!-- Top Left Corner -->
+        <path d="M-75,-75 L-65,-75 L-65,-65 L-75,-65 Z" fill="#FFE135"/>
+        <!-- Top Right Corner -->
+        <path d="M65,-75 L75,-75 L75,-65 L65,-65 Z" fill="#FFE135"/>
+        <!-- Bottom Left Corner -->
+        <path d="M-75,65 L-65,65 L-65,75 L-75,75 Z" fill="#FFE135"/>
+        <!-- Bottom Right Corner -->
+        <path d="M65,65 L75,65 L75,75 L65,75 Z" fill="#FFE135"/>
+    </g>
+</svg> 
