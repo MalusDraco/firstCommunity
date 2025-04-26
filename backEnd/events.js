@@ -100,6 +100,32 @@ async function insertPoliceEvent(desc, pic, title, addr, long, lat, date, time, 
     console.log(result);
 }
 
+async function getCommunityEvents() {
+    const db = client.db("events");
+    const events = db.collection("Community");
+    const result = await events.find().project({_id:0});
+    return result.toArray();
+}
+
+async function insertCommunityEvent(desc, pic, title, addr, long, lat, date, time, org) {
+    const db = client.db("events");
+    const events = db.collection("Community");
+    date = new Date(date);
+
+    const doc = {
+        "description": desc,
+        "picture": pic,
+        "title": title,
+        "location": [{"address": addr, "long": long, "lat": lat}],
+        "date": date, // YYYY-MM-DD
+        "time": time,
+        "organization": org
+    }
+
+    let result = await events.insertOne(doc);
+    console.log(result);
+}
+
 async function deleteDone() {
     const db = client.db('events');
     const events = db.collection("EMT");
