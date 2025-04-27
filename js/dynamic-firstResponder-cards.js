@@ -6,21 +6,10 @@ const arr = await res.json();
 
 let card_div = document.querySelector(".request-cards");
 let finalHTML = card_div.innerHTML;
-// console.log(finalHTML);
-// console.log(arr);
 
 function createCards() {
   // Code that iterates through each object to create a new event card
   arr.forEach((event) => {
-    const submissionDate = new Date(event.submissionDate).toLocaleDateString(
-      "en-US",
-      {
-        month: "2-digit",
-        day: "2-digit",
-        year: "numeric",
-      }
-    );
-
     const formattedDate = new Date(event.date)
       .toLocaleDateString("en-CA", {
         year: "numeric",
@@ -44,7 +33,6 @@ function createCards() {
               </div>
             </article>`;
   });
-  console.log(finalHTML);
   card_div.innerHTML = finalHTML;
 }
 createCards();
