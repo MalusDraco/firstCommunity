@@ -71,17 +71,21 @@ body {
 
 .interface-cards {
     display: flex;
-    gap: 40px;
+    gap: 60px;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .interface-card {
     background: white;
     border-radius: 20px;
-    padding: 30px;
-    width: 100%;
-    max-width: 400px;
+    padding: 40px;
+    flex: 1;
+    min-width: 400px;
+    max-width: 600px;
     text-decoration: none;
     color: inherit;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -94,14 +98,14 @@ body {
 }
 
 .card-icon {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
-    font-size: 2rem;
+    margin-bottom: 25px;
+    font-size: 2.5rem;
 }
 
 .responder-card .card-icon {
@@ -115,27 +119,29 @@ body {
 }
 
 .interface-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
     color: #333;
 }
 
 .interface-card p {
+    font-size: 1.1rem;
     color: #666;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .interface-card ul {
     list-style: none;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
 
 .interface-card li {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
+    gap: 12px;
+    margin-bottom: 15px;
     color: #444;
+    font-size: 1.1rem;
 }
 
 .interface-card li i {
@@ -176,8 +182,14 @@ body {
         font-size: 1rem;
     }
 
+    .interface-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
     .interface-card {
-        padding: 20px;
+        width: 100%;
+        max-width: 400px;
     }
 }
 
