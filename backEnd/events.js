@@ -195,8 +195,8 @@ app.get("/communityEvents", async (req, res) => {
 app.post("/newCommunityEvent", jsonParser,
     function (req,res) {
 
-    const {title, date, description, organization, address, hours, status, submissionDate} = req.body;
-    Mongo.insertCommunityEvent(description, "", title, address, 0, 0, date, hours, organization, submissionDate, status);
+    const {title, date, description, organization, address, longitude, latitude, hours, status, submissionDate} = req.body;
+    Mongo.insertCommunityEvent(description, "", title, address, longitude, latitude, date, hours, organization, submissionDate, status);
 
     console.log(req.body);
 
