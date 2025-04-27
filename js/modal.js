@@ -77,6 +77,16 @@ function initializeModal() {
     requestForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
+    // Handling for location not found
+    if (lat === undefined || long === undefined) {
+      geocodeModalAddress();
+    }
+
+    if (lat === undefined || long === undefined) {
+      alert('Could not geocode location. Please check the address.');
+      return;
+    }
+
       // Get form data
       const formData = new FormData(requestForm);
       const requestId = generateUniqueId();
