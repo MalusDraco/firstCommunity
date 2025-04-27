@@ -1,158 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>First Responder Dashboard</title>
-    <link href="css/styles.css" rel="stylesheet">
-    <link href="css/dashboard.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-</head>
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/dashboard.css" rel="stylesheet" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
 
-<body class="dashboard-body">
+  <body class="dashboard-body">
     <nav class="sidebar">
-        <div class="sidebar-header">
-            <img src="assets/logo.svg" alt="First Responder Logo" class="logo">
-            <h2>First Responder</h2>
-        </div>
+      <div class="sidebar-header">
+        <img src="assets/logo.svg" alt="First Responder Logo" class="logo" />
+        <h2>First Responder</h2>
+      </div>
 
-        <ul class="nav-links">
-            <li class="active">
-                <a href="#dashboard">
-                    <i class="fas fa-home"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="#my-events">
-                    <i class="fas fa-calendar-alt"></i>
-                    <span>My Events</span>
-                </a>
-            </li>
-            <li>
-                <a href="#community-events">
-                    <i class="fas fa-users"></i>
-                    <span>Community Events</span>
-                </a>
-            </li>
-            <li>
-                <a href="#messages">
-                    <i class="fas fa-envelope"></i>
-                    <span>Messages</span>
-                </a>
-            </li>
-        </ul>
+      <ul class="nav-links">
+        <li class="active">
+          <a href="#dashboard">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="#my-events">
+            <i class="fas fa-calendar-alt"></i>
+            <span>My Events</span>
+          </a>
+        </li>
+        <li>
+          <a href="#community-events">
+            <i class="fas fa-users"></i>
+            <span>Community Events</span>
+          </a>
+        </li>
+        <li>
+          <a href="#messages">
+            <i class="fas fa-envelope"></i>
+            <span>Messages</span>
+          </a>
+        </li>
+      </ul>
 
-        <div class="sidebar-footer">
-            <a href="index.html" class="logout">
-                <i class="fas fa-sign-out-alt"></i>
-                <span>Logout</span>
-            </a>
-        </div>
+      <div class="sidebar-footer">
+        <a href="index.html" class="logout">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </a>
+      </div>
     </nav>
 
     <main class="dashboard-main">
-        <header class="dashboard-header">
-            <div class="header-left">
-                <h1>Welcome Back, First Responder!</h1>
-                <p>Here's what's happening in your community</p>
-            </div>
-        </header>
-
-        <div class="dashboard-content">
-            <section class="quick-actions">
-                <h2>Quick Actions</h2>
-                <div class="action-cards">
-                    <a href="#post-volunteer" class="action-card">
-                        <i class="fas fa-hand-holding-heart"></i>
-                        <h3>Post Volunteer Opportunity</h3>
-                        <p>Share opportunities with your community</p>
-                    </a>
-                    <a href="#view-events" class="action-card">
-                        <i class="fas fa-calendar-check"></i>
-                        <h3>View Community Events</h3>
-                        <p>See where you can help</p>
-                    </a>
-                    <a href="#messages" class="action-card">
-                        <i class="fas fa-comments"></i>
-                        <h3>Message Community</h3>
-                        <p>Connect with event organizers</p>
-                    </a>
-                </div>
-            </section>
-
-            <section class="upcoming-events">
-                <div class="section-header">
-                    <h2>Upcoming Events</h2>
-                    <a href="#all-events" class="view-all">View All</a>
-                </div>
-                <div class="event-cards">
-                    <article class="event-card">
-                        <div class="event-date">
-                            <span class="day">15</span>
-                            <span class="month">MAR</span>
-                        </div>
-                        <div class="event-details">
-                            <h3>School Safety Workshop</h3>
-                            <p class="location"><i class="fas fa-map-marker-alt"></i> Central Elementary School</p>
-                            <p class="time"><i class="fas fa-clock"></i> 9:00 AM - 2:00 PM</p>
-                        </div>
-                        <button class="event-action-btn">View Details</button>
-                    </article>
-
-                    <article class="event-card">
-                        <div class="event-date">
-                            <span class="day">22</span>
-                            <span class="month">MAR</span>
-                        </div>
-                        <div class="event-details">
-                            <h3>Community Health Fair</h3>
-                            <p class="location"><i class="fas fa-map-marker-alt"></i> City Park</p>
-                            <p class="time"><i class="fas fa-clock"></i> 10:00 AM - 4:00 PM</p>
-                        </div>
-                        <button class="event-action-btn">View Details</button>
-                    </article>
-                </div>
-            </section>
-
-            <section class="community-requests">
-                <div class="section-header">
-                    <h2>Community Requests</h2>
-                    <a href="#all-requests" class="view-all">View All</a>
-                </div>
-                <div class="request-cards">
-                    <article class="request-card">
-                        <h3>Local School Demonstration</h3>
-                        <p>Need first responders for emergency response demonstration at Central Elementary School.
-                            Looking for volunteers to show proper emergency procedures and safety protocols.</p>
-                        <div class="request-meta">
-                            <span><i class="fas fa-calendar"></i> March 25, 2024</span>
-                            <span><i class="fas fa-user"></i> Posted by Community Center</span>
-                        </div>
-                        <div class="request-actions">
-                            <button class="accept-btn">Accept Request</button>
-                            <button class="details-btn">View Details</button>
-                        </div>
-                    </article>
-
-                    <article class="request-card">
-                        <h3>CPR Training Workshop</h3>
-                        <p>Looking for EMTs to conduct basic CPR training session for our neighborhood group.
-                            Approximately 15 participants expected.</p>
-                        <div class="request-meta">
-                            <span><i class="fas fa-calendar"></i> April 2, 2024</span>
-                            <span><i class="fas fa-user"></i> Posted by Local Library</span>
-                        </div>
-                        <div class="request-actions">
-                            <button class="accept-btn">Accept Request</button>
-                            <button class="details-btn">View Details</button>
-                        </div>
-                    </article>
-                </div>
-            </section>
+      <header class="dashboard-header">
+        <div class="header-left">
+          <h1>Welcome Back, First Responder!</h1>
+          <p>Here's what's happening in your community</p>
         </div>
-    </main>
-</body>
+      </header>
 
+      <div class="dashboard-content">
+        <section class="quick-actions">
+          <h2>Quick Actions</h2>
+          <div class="action-cards">
+            <a href="#post-volunteer" class="action-card">
+              <i class="fas fa-hand-holding-heart"></i>
+              <h3>Post Volunteer Opportunity</h3>
+              <p>Share opportunities with your community</p>
+            </a>
+            <a href="#view-events" class="action-card">
+              <i class="fas fa-calendar-check"></i>
+              <h3>View Community Events</h3>
+              <p>See where you can help</p>
+            </a>
+            <a href="#messages" class="action-card">
+              <i class="fas fa-comments"></i>
+              <h3>Message Community</h3>
+              <p>Connect with event organizers</p>
+            </a>
+          </div>
+        </section>
+
+        <section class="upcoming-events">
+          <div class="section-header">
+            <h2>Upcoming Events</h2>
+            <a href="#all-events" class="view-all">View All</a>
+          </div>
+          <div class="event-cards">
+            <article class="event-card">
+              <div class="event-date">
+                <span class="day">15</span>
+                <span class="month">MAR</span>
+              </div>
+              <div class="event-details">
+                <h3>School Safety Workshop</h3>
+                <p class="location">
+                  <i class="fas fa-map-marker-alt"></i> Central Elementary
+                  School
+                </p>
+                <p class="time">
+                  <i class="fas fa-clock"></i> 9:00 AM - 2:00 PM
+                </p>
+              </div>
+              <button class="event-action-btn">View Details</button>
+            </article>
+
+            <article class="event-card">
+              <div class="event-date">
+                <span class="day">22</span>
+                <span class="month">MAR</span>
+              </div>
+              <div class="event-details">
+                <h3>Community Health Fair</h3>
+                <p class="location">
+                  <i class="fas fa-map-marker-alt"></i> City Park
+                </p>
+                <p class="time">
+                  <i class="fas fa-clock"></i> 10:00 AM - 4:00 PM
+                </p>
+              </div>
+              <button class="event-action-btn">View Details</button>
+            </article>
+          </div>
+        </section>
+
+        <section class="community-requests">
+          <div class="section-header">
+            <h2>Community Requests</h2>
+            <a href="#all-requests" class="view-all">View All</a>
+          </div>
+          <div class="request-cards">
+            <article class="request-card">
+              <h3>Local School Demonstration</h3>
+              <p>
+                Need first responders for emergency response demonstration at
+                Central Elementary School. Looking for volunteers to show proper
+                emergency procedures and safety protocols.
+              </p>
+              <div class="request-meta">
+                <span><i class="fas fa-calendar"></i> March 25, 2024</span>
+                <span
+                  ><i class="fas fa-user"></i> Posted by Community Center</span
+                >
+              </div>
+              <div class="request-actions">
+                <button class="accept-btn">Accept Request</button>
+                <button class="details-btn">View Details</button>
+              </div>
+            </article>
+
+            <article class="request-card">
+              <h3>CPR Training Workshop</h3>
+              <p>
+                Looking for EMTs to conduct basic CPR training session for our
+                neighborhood group. Approximately 15 participants expected.
+              </p>
+              <div class="request-meta">
+                <span><i class="fas fa-calendar"></i> April 2, 2024</span>
+                <span><i class="fas fa-user"></i> Posted by Local Library</span>
+              </div>
+              <div class="request-actions">
+                <button class="accept-btn">Accept Request</button>
+                <button class="details-btn">View Details</button>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+    <script src="js/dynamic-cards.js" type="module"></script>
+  </body>
 </html>
