@@ -60,7 +60,7 @@ function createCards() {
     </div>
      <div class="request-status ${event.status}">
         <i class="fas fa-${getStatusIcon(event.status)}"></i>
-        ${capitalizeFirstLetter(event.status)}
+        ${capitalizeFirstLetter(event.status)} Response
      </div>
      </div>
      `;
