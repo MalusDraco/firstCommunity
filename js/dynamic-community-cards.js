@@ -48,18 +48,18 @@ function createCards() {
     <div class="request-card">
     <h3>${event.title}</h3>
     <p>${event.description}</p>
-    <div className="request-meta">
-        <span><i className="fas fa-calendar"></i>Event Date: ${formattedDate}</span>
-        <span><i className="fas fa-clock"></i>Submitted: ${submissionDate}</span>
-        <span><i className="fas fa-building"></i>${event.organization}</span>
-        <span><i className="fas fa-map-marker-alt"></i>${
+    <div class="request-meta">
+        <span><i class="fas fa-calendar"></i>Event Date: ${formattedDate}</span>
+        <span><i class="fas fa-clock"></i>Submitted: ${submissionDate}</span>
+        <span><i class="fas fa-building"></i>${event.organization}</span>
+        <span><i class="fas fa-map-marker-alt"></i>${
           event.location[0].address
         }</span>
-        <span><i className="fas fa-clock"></i>${event.time}</span>
+        <span><i class="fas fa-clock"></i>${event.time}</span>
     
     </div>
-     <div className="request-status ${event.status}">
-        <i className="fas fa-${getStatusIcon(event.status)}"></i>
+     <div class="request-status ${event.status}">
+        <i class="fas fa-${getStatusIcon(event.status)}"></i>
         ${capitalizeFirstLetter(event.status)}
      </div>
      </div>
