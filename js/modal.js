@@ -165,7 +165,7 @@ function createRequestCard(data) {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
-  }).replace(/-/g, '/')
+  }).replace(/-/g, '/');
 
   card.innerHTML = `
         <h3>${data.title}</h3>

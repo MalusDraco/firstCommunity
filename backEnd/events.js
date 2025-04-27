@@ -129,7 +129,7 @@ class db {
         return result.toArray();
     }
 
-    insertCommunityEvent(desc, pic, title, addr, long, lat, date, time, org, submissionDate) {
+    insertCommunityEvent(desc, pic, title, addr, long, lat, date, time, org, submissionDate, status) {
         const db = this.client.db("events");
         const events = db.collection("Community");
         date = new Date(date).toISOString();
@@ -142,7 +142,8 @@ class db {
             "date": date, // YYYY-MM-DD
             "time": time,
             "organization": org,
-            "submissionDate": submissionDate
+            "submissionDate": submissionDate,
+            "status": status
         }
 
         let result = events.insertOne(doc);
@@ -182,6 +183,11 @@ app.get("/emtEvents", async (req, res) => {
     res.send(arr);
 });
 
+app.get("/communityEvents", async (req, res) => {
+    let arr = await Mongo.getCommunityEvents();
+    res.send(arr);
+})
+
 /* ==================================
             Event Setters
  ================================== */
@@ -190,7 +196,7 @@ app.post("/newCommunityEvent", jsonParser,
     function (req,res) {
 
     const {title, date, description, organization, address, hours, status, submissionDate} = req.body;
-    Mongo.insertCommunityEvent(description, "", title, address, 0, 0, date, hours, organization, submissionDate);
+    Mongo.insertCommunityEvent(description, "", title, address, 0, 0, date, hours, organization, submissionDate, status);
 
     console.log(req.body);
 
