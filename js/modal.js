@@ -132,6 +132,12 @@ function saveAndCreateRequest(requestData) {
   );
 
 
+  // Send Post Request for MongoDB
+  fetch('http://localhost:3000/newCommunityEvent', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(requestData)
+  })
 
   // Create new request card
   const newRequestCard = createRequestCard(requestData);
@@ -159,6 +165,7 @@ function createRequestCard(data) {
       year: 'numeric',
     }
   );
+
 
   card.innerHTML = `
         <h3>${data.title}</h3>

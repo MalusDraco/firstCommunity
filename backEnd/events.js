@@ -1,163 +1,185 @@
 const {MongoClient} = require("mongodb");
-const express = require("express")
-const app = express();
-let client;
+const express = require("express");
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const app = express(); // Enable resource access from client
 
-async function establishConnection() {
-    const uri = "mongodb://localhost:27017/?appName=firstResponderApp&directConnection=true&serverSelectionTimeoutMS=2000";
-    client = new MongoClient(uri);
-    try {
-        await client.connect();
-        console.log("Connected successfully to server");
-    } catch (e) {
-        console.error(e);
-        process.exit(1);
-    }
-    return client
-}
+// Post req Parsers
+const jsonParser = bodyParser.json();
+const urlencodedParser = bodyParser.urlencoded({extended: false});
 
-async function test() {
-    try {
-        await insertEMTEvent("testDesc", "path/testPic", "testTitle", "testAddr", 1, 1, "2025-04-25", "testTime", "testOrg");
-        let arr = await getEMTEvents();
-        console.log(arr)
 
-        console.log("==========================")
+class db {
 
-        // await deleteDone();
-    } catch (e) {
-        console.error(e);
-    } finally {
-        await client.close();
-    }
-}
-
-async function getEMTEvents() {
-    const db = client.db("events");
-    const events = db.collection("EMT");
-    const result = await events.find().project({_id: 0});
-    return result.toArray();
-}
-
-async function insertEMTEvent(desc, pic, title, addr, long, lat, date, time, org) {
-    const db = client.db("events");
-    const events = db.collection("EMT");
-    date = new Date(date).toISOString();
-
-    const doc = {
-        "description": desc,
-        "picture": pic,
-        "title": title,
-        "location": [{"address": addr, "long": long, "lat": lat}],
-        "date": date,
-        "time": time,
-        "organization": org
+    constructor() {
+        this.establishConnection();
     }
 
-    let result = await events.insertOne(doc);
-    console.log(result);
-}
-
-async function getFireEvents() {
-    const db = client.db("events");
-    const events = db.collection("Fire");
-    const result = await events.find().project({_id: 0});
-    return result.toArray();
-}
-
-async function insertFireEvent(desc, pic, title, addr, long, lat, date, time, org) {
-    const db = client.db("events");
-    const events = db.collection("Fire");
-    date = new Date(date).toISOString();
-
-    const doc = {
-        "description": desc,
-        "picture": pic,
-        "title": title,
-        "location": [{"address": addr, "long": long, "lat": lat}],
-        "date": date,
-        "time": time,
-        "organization": org
+    async establishConnection() {
+        const uri = "mongodb://localhost:27017/?appName=firstResponderApp&directConnection=true&serverSelectionTimeoutMS=2000";
+        this.client = new MongoClient(uri);
+        try {
+            await this.client.connect();
+            console.log("Connected successfully to server");
+        } catch (e) {
+            console.error(e);
+            process.exit(1);
+        }
     }
 
-    let result = await events.insertOne(doc);
-    console.log(result);
-}
+    async test() {
+        try {
+            await this.insertEMTEvent("testDesc", "path/testPic", "testTitle", "testAddr", 1, 1, "2025-04-25", "testTime", "testOrg");
+            let arr = await this.getEMTEvents();
+            console.log(arr)
 
-async function getPoliceEvents() {
-    const db = client.db("events");
-    const events = db.collection("Police");
-    const result = await events.find().project({_id: 0});
-    return result.toArray();
-}
+            console.log("==========================")
 
-async function insertPoliceEvent(desc, pic, title, addr, long, lat, date, time, org) {
-    const db = client.db("events");
-    const events = db.collection("Police");
-    date = new Date(date).toISOString();
-
-    const doc = {
-        "description": desc,
-        "picture": pic,
-        "title": title,
-        "location": [{"address": addr, "long": long, "lat": lat}],
-        "date": date, // YYYY-MM-DD
-        "time": time,
-        "organization": org
+            // await this.deleteDone();
+        } catch (e) {
+            console.error(e);
+        } finally {
+            await this.client.close();
+        }
     }
 
-    let result = await events.insertOne(doc);
-    console.log(result);
-}
-
-async function getCommunityEvents() {
-    const db = client.db("events");
-    const events = db.collection("Community");
-    const result = await events.find().project({_id: 0});
-    return result.toArray();
-}
-
-async function insertCommunityEvent(desc, pic, title, addr, long, lat, date, time, org) {
-    const db = client.db("events");
-    const events = db.collection("Community");
-    date = new Date(date).toISOString();
-
-    const doc = {
-        "description": desc,
-        "picture": pic,
-        "title": title,
-        "location": [{"address": addr, "long": long, "lat": lat}],
-        "date": date, // YYYY-MM-DD
-        "time": time,
-        "organization": org
+    async getEMTEvents() {
+        const db = this.client.db("events");
+        const events = db.collection("EMT");
+        const result = await events.find().project({_id: 0});
+        return result.toArray();
     }
 
-    let result = await events.insertOne(doc);
-    console.log(result);
+    insertEMTEvent(desc, pic, title, addr, long, lat, date, time, org) {
+        const db = this.client.db("events");
+        const events = db.collection("EMT");
+        date = new Date(date).toISOString();
+
+        const doc = {
+            "description": desc,
+            "picture": pic,
+            "title": title,
+            "location": [{"address": addr, "long": long, "lat": lat}],
+            "date": date,
+            "time": time,
+            "organization": org
+        }
+
+        let result = events.insertOne(doc);
+        console.log(result);
+    }
+
+    async getFireEvents() {
+        const db = this.client.db("events");
+        const events = db.collection("Fire");
+        const result = await events.find().project({_id: 0});
+        return result.toArray();
+    }
+
+    insertFireEvent(desc, pic, title, addr, long, lat, date, time, org) {
+        const db = this.client.db("events");
+        const events = db.collection("Fire");
+        date = new Date(date).toISOString();
+
+        const doc = {
+            "description": desc,
+            "picture": pic,
+            "title": title,
+            "location": [{"address": addr, "long": long, "lat": lat}],
+            "date": date,
+            "time": time,
+            "organization": org
+        }
+
+        let result = events.insertOne(doc);
+        console.log(result);
+
+    }
+
+    async getPoliceEvents() {
+        const db = this.client.db("events");
+        const events = db.collection("Police");
+        const result = await events.find().project({_id: 0});
+        return result.toArray();
+    }
+
+    insertPoliceEvent(desc, pic, title, addr, long, lat, date, time, org) {
+        const db = this.client.db("events");
+        const events = db.collection("Police");
+        date = new Date(date).toISOString();
+
+        const doc = {
+            "description": desc,
+            "picture": pic,
+            "title": title,
+            "location": [{"address": addr, "long": long, "lat": lat}],
+            "date": date, // YYYY-MM-DD
+            "time": time,
+            "organization": org
+        }
+
+        let result = events.insertOne(doc);
+        console.log(result);
+    }
+
+    async getCommunityEvents() {
+        const db = this.client.db("events");
+        const events = db.collection("Community");
+        const result = await events.find().project({_id: 0});
+        return result.toArray();
+    }
+
+    insertCommunityEvent(desc, pic, title, addr, long, lat, date, time, org) {
+        const db = this.client.db("events");
+        const events = db.collection("Community");
+        date = new Date(date).toISOString();
+
+        const doc = {
+            "description": desc,
+            "picture": pic,
+            "title": title,
+            "location": [{"address": addr, "long": long, "lat": lat}],
+            "date": date, // YYYY-MM-DD
+            "time": time,
+            "organization": org
+        }
+
+        let result = events.insertOne(doc);
+        // console.log(result);
+    }
+
+    async deleteDone() {
+        const db = this.client.db('events');
+        const events = db.collection("EMT");
+
+        let currDate = new Date().toISOString();
+
+        let result = await events.deleteMany({date: {$lt: currDate}});
+        console.log(result);
+
+    }
+
+    async close() {
+        this.client.close();
+        console.log("Connection closed");
+    }
 }
 
-async function deleteDone() {
-    const db = client.db('events');
-    const events = db.collection("EMT");
-
-    let currDate = new Date().toISOString();
-
-    let result = await events.deleteMany({date: {$lt: currDate}});
-    console.log(result);
-
-}
-
-establishConnection();
-test();
+// establishConnection();
+// test();
 
 // This is similar to RestAPI in Java
+let Mongo = new db(); // Client connection used by all Getters/Setters
+
+app.use(cors());
+app.use(express.json());
+
 /* ==================================
             Event Getters
  ================================== */
 
 app.get("/emtEvents", async (req, res) => {
-    let client = establishConnection();
-    let arr = await getEMTEvents();
+    let arr = await Mongo.getEMTEvents();
     res.send(arr);
 });
 
@@ -165,7 +187,27 @@ app.get("/emtEvents", async (req, res) => {
             Event Setters
  ================================== */
 
+app.post("/newCommunityEvent", jsonParser,
+    function (req,res) {
 
-app.listen(3000, () => {
+    // const {desc, pic, title, addr, long, lat, date, time, org} = req.body;
+    // Mongo.insertCommunityEvent(desc, pic, title, addr, long, lat, date, time, org);
+
+    console.log(req.body);
+
+    res.send("Event added");
+})
+
+/* ==================================
+           Server settings
+ ================================== */
+const PORT = 3000;
+app.listen(PORT, () => {
     console.log("Server running on port 3000");
 })
+
+// Close Mongo Connection on server stop
+process.on('SIGINT', async () => {
+    await Mongo.close();
+    process.exit(0);
+});
