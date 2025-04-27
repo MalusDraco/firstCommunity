@@ -35,13 +35,18 @@ p, span, a, button {
 
 /* Sidebar Styles */
 .sidebar {
-    width: 260px;
+    width: 300px;
     background-color: var(--retro-primary);
-    height: 100vh;
+    height: auto;
     padding: 20px;
     display: flex;
     flex-direction: column;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
 }
 
 .sidebar-header {
@@ -123,8 +128,8 @@ p, span, a, button {
     padding: 30px;
     overflow-y: auto;
     background-color: var(--retro-light);
+    margin-left: 300px;
 }
-
 /* Header */
 .header {
     background-color: #FFE135;
@@ -639,11 +644,6 @@ p, span, a, button {
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
-    .sidebar {
-        width: 200px;
-    }
-}
 
 @media (max-width: 768px) {
     .dashboard-body {
