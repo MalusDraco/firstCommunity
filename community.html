@@ -148,10 +148,20 @@
     <div id="modalContainer"></div>
 
     <!-- Scripts -->
+    <script src="config/local-key.js"></script>
+    <script>
+    if (!document.querySelector('script[data-gmaps]')) {
+      const gmaps = document.createElement('script');
+      gmaps.src =
+        `https://maps.googleapis.com/maps/api/js?key=${window.GMAPS_KEY}` +
+        `&libraries=places&callback=initMap`;
+      gmaps.async = true;
+      gmaps.defer = true;
+      gmaps.setAttribute('data-gmaps', '');
+      document.head.appendChild(gmaps);
+    }
+    </script>
     <script src="js/modal.js" type="module"></script>
-    <script type="module" src="/map_script/map_lookup.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=KEY_GOES_HERE&libraries=places&callback=initMap" async
-        defer></script>
 </body>
 
 </html>
