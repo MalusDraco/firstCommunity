@@ -1,13 +1,25 @@
-import {MongoClient} from "mongodb";
+const {MongoClient} = require("mongodb");
+const express = require("express");
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const app = express(); // Enable resource access from client
+
+// Post req Parsers
+const jsonParser = bodyParser.json();
+const urlencodedParser = bodyParser.urlencoded({extended: false});
+
 
 class db {
 
-    async constructor() {
-        const uri = "mongodb://localhost:27017/?appName=firstResponderApp&directConnection=true&serverSelectionTimeoutMS=2000";
-        let client = new MongoClient(uri);
+    constructor() {
+        this.establishConnection();
+    }
 
+    async establishConnection() {
+        const uri = "mongodb://localhost:27017/?appName=firstResponderApp&directConnection=true&serverSelectionTimeoutMS=2000";
+        this.client = new MongoClient(uri);
         try {
-            await client.connect();
+            await this.client.connect();
             console.log("Connected successfully to server");
         } catch (e) {
             console.error(e);
@@ -17,29 +29,29 @@ class db {
 
     async test() {
         try {
-            await insertEMTEvent("testDesc", "path/testPic", "testTitle", "testAddr", 1, 1, "2025-04-25", "testTime", "testOrg");
-            let arr = await getEMTEvents();
+            await this.insertEMTEvent("testDesc", "path/testPic", "testTitle", "testAddr", 1, 1, "2025-04-25", "testTime", "testOrg");
+            let arr = await this.getEMTEvents();
             console.log(arr)
 
             console.log("==========================")
 
-            await deleteDone();
+            // await this.deleteDone();
         } catch (e) {
             console.error(e);
         } finally {
-            await client.close();
+            await this.client.close();
         }
     }
 
     async getEMTEvents() {
-        const db = client.db("events");
+        const db = this.client.db("events");
         const events = db.collection("EMT");
         const result = await events.find().project({_id: 0});
         return result.toArray();
     }
 
-    async insertEMTEvent(desc, pic, title, addr, long, lat, date, time, org) {
-        const db = client.db("events");
+    insertEMTEvent(desc, pic, title, addr, long, lat, date, time, org) {
+        const db = this.client.db("events");
         const events = db.collection("EMT");
         date = new Date(date).toISOString();
 
@@ -53,19 +65,19 @@ class db {
             "organization": org
         }
 
-        let result = await events.insertOne(doc);
+        let result = events.insertOne(doc);
         console.log(result);
     }
 
     async getFireEvents() {
-        const db = client.db("events");
+        const db = this.client.db("events");
         const events = db.collection("Fire");
         const result = await events.find().project({_id: 0});
         return result.toArray();
     }
 
-    async insertFireEvent(desc, pic, title, addr, long, lat, date, time, org) {
-        const db = client.db("events");
+    insertFireEvent(desc, pic, title, addr, long, lat, date, time, org) {
+        const db = this.client.db("events");
         const events = db.collection("Fire");
         date = new Date(date).toISOString();
 
@@ -79,19 +91,20 @@ class db {
             "organization": org
         }
 
-        let result = await events.insertOne(doc);
+        let result = events.insertOne(doc);
         console.log(result);
+
     }
 
     async getPoliceEvents() {
-        const db = client.db("events");
+        const db = this.client.db("events");
         const events = db.collection("Police");
         const result = await events.find().project({_id: 0});
         return result.toArray();
     }
 
-    async insertPoliceEvent(desc, pic, title, addr, long, lat, date, time, org) {
-        const db = client.db("events");
+    insertPoliceEvent(desc, pic, title, addr, long, lat, date, time, org) {
+        const db = this.client.db("events");
         const events = db.collection("Police");
         date = new Date(date).toISOString();
 
@@ -105,19 +118,19 @@ class db {
             "organization": org
         }
 
-        let result = await events.insertOne(doc);
+        let result = events.insertOne(doc);
         console.log(result);
     }
 
     async getCommunityEvents() {
-        const db = client.db("events");
+        const db = this.client.db("events");
         const events = db.collection("Community");
         const result = await events.find().project({_id: 0});
         return result.toArray();
     }
 
-    async insertCommunityEvent(desc, pic, title, addr, long, lat, date, time, org) {
-        const db = client.db("events");
+    insertCommunityEvent(desc, pic, title, addr, long, lat, date, time, org, submissionDate, status) {
+        const db = this.client.db("events");
         const events = db.collection("Community");
         date = new Date(date).toISOString();
 
@@ -128,15 +141,17 @@ class db {
             "location": [{"address": addr, "long": long, "lat": lat}],
             "date": date, // YYYY-MM-DD
             "time": time,
-            "organization": org
+            "organization": org,
+            "submissionDate": submissionDate,
+            "status": status
         }
 
-        let result = await events.insertOne(doc);
-        console.log(result);
+        let result = events.insertOne(doc);
+        // console.log(result);
     }
 
     async deleteDone() {
-        const db = client.db('events');
+        const db = this.client.db('events');
         const events = db.collection("EMT");
 
         let currDate = new Date().toISOString();
@@ -145,4 +160,59 @@ class db {
         console.log(result);
 
     }
+
+    async close() {
+        this.client.close();
+        console.log("Connection closed");
+    }
 }
+
+
+// This is similar to RestAPI in Java
+let Mongo = new db(); // Client connection used by all Getters/Setters
+
+app.use(cors());
+app.use(express.json());
+
+/* ==================================
+            Event Getters
+ ================================== */
+
+app.get("/emtEvents", async (req, res) => {
+    let arr = await Mongo.getEMTEvents();
+    res.send(arr);
+});
+
+app.get("/communityEvents", async (req, res) => {
+    let arr = await Mongo.getCommunityEvents();
+    res.send(arr);
+})
+
+/* ==================================
+            Event Setters
+ ================================== */
+
+app.post("/newCommunityEvent", jsonParser,
+    function (req,res) {
+
+    const {title, date, description, organization, address, hours, status, submissionDate} = req.body;
+    Mongo.insertCommunityEvent(description, "", title, address, 0, 0, date, hours, organization, submissionDate, status);
+
+    console.log(req.body);
+
+    res.send("Event added");
+})
+
+/* ==================================
+           Server settings
+ ================================== */
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log("Server running on port 3000");
+})
+
+// Close Mongo Connection on server stop
+process.on('SIGINT', async () => {
+    await Mongo.close();
+    process.exit(0);
+});

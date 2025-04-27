@@ -1,3 +1,5 @@
+// Database class
+
 // Modal functionality
 let modal; // Declare modal at the top level
 let long;
@@ -81,18 +83,13 @@ function initializeModal() {
 
       // Format the date as YYYY/MM/DD
       const dateInput = formData.get('date');
-      const formattedDate = dateInput
+      let formattedDate = dateInput
         ? new Date(dateInput)
-            .toLocaleDateString('en-CA', {
-              year: 'numeric',
-              month: '2-digit',
-              day: '2-digit',
-            })
-            .replace(/-/g, '/')
+            .toISOString()
         : '';
 
+
       const requestData = {
-        id: requestId,
         title: formData.get('title'),
         date: formattedDate,
         description: formData.get('description'),
@@ -129,6 +126,14 @@ function saveAndCreateRequest(requestData) {
     JSON.stringify(requestData)
   );
 
+
+  // Send Post Request for MongoDB
+  fetch('http://localhost:3000/newCommunityEvent', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(requestData)
+  })
+
   // Create new request card
   const newRequestCard = createRequestCard(requestData);
 
@@ -156,11 +161,17 @@ function createRequestCard(data) {
     }
   );
 
+  const formattedDate = new Date(data.date).toLocaleDateString('en-CA', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).replace(/-/g, '/');
+
   card.innerHTML = `
         <h3>${data.title}</h3>
         <p>${data.description}</p>
         <div class="request-meta">
-            <span><i class="fas fa-calendar"></i>Event Date: ${data.date}</span>
+            <span><i class="fas fa-calendar"></i>Event Date: ${formattedDate}</span>
             <span><i class="fas fa-clock"></i>Submitted: ${submissionDate}</span>
             <span><i class="fas fa-building"></i>${data.organization}</span>
             <span><i class="fas fa-map-marker-alt"></i>${data.location}</span>
