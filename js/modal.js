@@ -1,3 +1,5 @@
+// Database class
+
 // Modal functionality
 let modal; // Declare modal at the top level
 let long;
@@ -81,7 +83,7 @@ function initializeModal() {
 
       // Format the date as YYYY/MM/DD
       const dateInput = formData.get('date');
-      const formattedDate = dateInput
+      let formattedDate = dateInput
         ? new Date(dateInput)
             .toLocaleDateString('en-CA', {
               year: 'numeric',
@@ -91,8 +93,8 @@ function initializeModal() {
             .replace(/-/g, '/')
         : '';
 
+
       const requestData = {
-        id: requestId,
         title: formData.get('title'),
         date: formattedDate,
         description: formData.get('description'),
@@ -128,6 +130,8 @@ function saveAndCreateRequest(requestData) {
     `request_${requestData.id}`,
     JSON.stringify(requestData)
   );
+
+
 
   // Create new request card
   const newRequestCard = createRequestCard(requestData);
