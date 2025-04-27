@@ -85,12 +85,7 @@ function initializeModal() {
       const dateInput = formData.get('date');
       let formattedDate = dateInput
         ? new Date(dateInput)
-            .toLocaleDateString('en-CA', {
-              year: 'numeric',
-              month: '2-digit',
-              day: '2-digit',
-            })
-            .replace(/-/g, '/')
+            .toISOString()
         : '';
 
 
@@ -166,12 +161,17 @@ function createRequestCard(data) {
     }
   );
 
+  const formattedDate = new Date(data.date).toLocaleDateString('en-CA', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).replace(/-/g, '/')
 
   card.innerHTML = `
         <h3>${data.title}</h3>
         <p>${data.description}</p>
         <div class="request-meta">
-            <span><i class="fas fa-calendar"></i>Event Date: ${data.date}</span>
+            <span><i class="fas fa-calendar"></i>Event Date: ${formattedDate}</span>
             <span><i class="fas fa-clock"></i>Submitted: ${submissionDate}</span>
             <span><i class="fas fa-building"></i>${data.organization}</span>
             <span><i class="fas fa-map-marker-alt"></i>${data.location}</span>

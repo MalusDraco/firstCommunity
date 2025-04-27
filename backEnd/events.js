@@ -129,7 +129,7 @@ class db {
         return result.toArray();
     }
 
-    insertCommunityEvent(desc, pic, title, addr, long, lat, date, time, org) {
+    insertCommunityEvent(desc, pic, title, addr, long, lat, date, time, org, submissionDate) {
         const db = this.client.db("events");
         const events = db.collection("Community");
         date = new Date(date).toISOString();
@@ -141,7 +141,8 @@ class db {
             "location": [{"address": addr, "long": long, "lat": lat}],
             "date": date, // YYYY-MM-DD
             "time": time,
-            "organization": org
+            "organization": org,
+            "submissionDate": submissionDate
         }
 
         let result = events.insertOne(doc);
@@ -165,8 +166,6 @@ class db {
     }
 }
 
-// establishConnection();
-// test();
 
 // This is similar to RestAPI in Java
 let Mongo = new db(); // Client connection used by all Getters/Setters
@@ -190,8 +189,8 @@ app.get("/emtEvents", async (req, res) => {
 app.post("/newCommunityEvent", jsonParser,
     function (req,res) {
 
-    // const {desc, pic, title, addr, long, lat, date, time, org} = req.body;
-    // Mongo.insertCommunityEvent(desc, pic, title, addr, long, lat, date, time, org);
+    const {title, date, description, organization, address, hours, status, submissionDate} = req.body;
+    Mongo.insertCommunityEvent(description, "", title, address, 0, 0, date, hours, organization, submissionDate);
 
     console.log(req.body);
 
