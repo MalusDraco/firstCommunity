@@ -9,3 +9,4 @@ build/
 
 .env
 config/local-key.js
+backend/package-lock.json

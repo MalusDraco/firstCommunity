@@ -1,147 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Community Dashboard - First Responder App</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/dashboard.css">
-    <link rel="stylesheet" href="css/modal.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="stylesheet" href="css/modal.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
 
-<body class="dashboard-body">
+  <body class="dashboard-body">
     <!-- Sidebar Navigation -->
     <nav class="sidebar">
-        <div class="sidebar-header">
-            <img src="assets/logo.svg" alt="First Responder Logo" class="logo">
-            <h2>Community Portal</h2>
-        </div>
-        <ul class="nav-links">
-            <li class="active">
-                <a href="#"><i class="fas fa-home"></i>Dashboard</a>
-            </li>
-            <li>
-                <a href="#"><i class="fas fa-calendar-alt"></i>My Requests</a>
-            </li>
-            <li>
-                <a href="#"><i class="fas fa-hands-helping"></i>Volunteer</a>
-            </li>
-            <li>
-                <a href="#"><i class="fas fa-bell"></i>Notifications</a>
-            </li>
-            <li>
-                <a href="#"><i class="fas fa-user"></i>Profile</a>
-            </li>
-        </ul>
-        <div class="sidebar-footer">
-            <a href="index.html" class="logout">
-                <i class="fas fa-sign-out-alt"></i>
-                Logout
-            </a>
-        </div>
+      <div class="sidebar-header">
+        <img src="assets/logo.svg" alt="First Responder Logo" class="logo" />
+        <h2>Community Portal</h2>
+      </div>
+      <ul class="nav-links">
+        <li class="active">
+          <a href="#"><i class="fas fa-home"></i>Dashboard</a>
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-calendar-alt"></i>My Requests</a>
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-hands-helping"></i>Volunteer</a>
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-bell"></i>Notifications</a>
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-user"></i>Profile</a>
+        </li>
+      </ul>
+      <div class="sidebar-footer">
+        <a href="index.html" class="logout">
+          <i class="fas fa-sign-out-alt"></i>
+          Logout
+        </a>
+      </div>
     </nav>
 
     <!-- Main Content -->
     <main class="dashboard-main">
-        <!-- Dashboard Header -->
-        <div class="dashboard-header">
-            <div class="header-left">
-                <h1>Welcome, Community Member!</h1>
-                <p>Stay connected with your local first responders</p>
-            </div>
+      <!-- Dashboard Header -->
+      <div class="dashboard-header">
+        <div class="header-left">
+          <h1>Welcome, Community Member!</h1>
+          <p>Stay connected with your local first responders</p>
         </div>
+      </div>
 
-        <!-- Quick Actions -->
-        <section class="quick-actions">
-            <h2>Quick Actions</h2>
-            <div class="action-cards">
-                <a href="#" class="action-card">
-                    <i class="fas fa-calendar-plus"></i>
-                    <h3>Submit Request</h3>
-                    <p>Request training or assistance from first responders</p>
-                </a>
-                <a href="#" class="action-card">
-                    <i class="fas fa-hand-holding-heart"></i>
-                    <h3>Volunteer</h3>
-                    <p>Find opportunities to help in your community</p>
-                </a>
-                <a href="#" class="action-card">
-                    <i class="fas fa-phone-alt"></i>
-                    <h3>Emergency Contacts</h3>
-                    <p>View important emergency contact information</p>
-                </a>
-            </div>
-        </section>
+      <!-- Quick Actions -->
+      <section class="quick-actions">
+        <h2>Quick Actions</h2>
+        <div class="action-cards">
+          <a href="#" class="action-card">
+            <i class="fas fa-calendar-plus"></i>
+            <h3>Submit Request</h3>
+            <p>Request training or assistance from first responders</p>
+          </a>
+          <a href="#" class="action-card">
+            <i class="fas fa-hand-holding-heart"></i>
+            <h3>Volunteer</h3>
+            <p>Find opportunities to help in your community</p>
+          </a>
+          <a href="#" class="action-card">
+            <i class="fas fa-phone-alt"></i>
+            <h3>Emergency Contacts</h3>
+            <p>View important emergency contact information</p>
+          </a>
+        </div>
+      </section>
 
-        <!-- My Requests -->
-        <section class="my-requests">
-            <div class="section-header">
-                <h2>My Requests</h2>
-                <a href="#" class="view-all">View All</a>
+      <!-- My Requests -->
+      <section class="my-requests">
+        <div class="section-header">
+          <h2>My Requests</h2>
+          <a href="#" class="view-all">View All</a>
+        </div>
+        <div class="request-cards">
+          <div class="request-card">
+            <h3>CPR Training Workshop</h3>
+            <p>
+              Request for a basic CPR training session for our neighborhood
+              group.
+            </p>
+            <div class="request-meta">
+              <span><i class="fas fa-calendar"></i>Requested for Aug 15</span>
+              <span><i class="fas fa-users"></i>15 participants</span>
             </div>
-            <div class="request-cards">
-                <div class="request-card">
-                    <h3>CPR Training Workshop</h3>
-                    <p>Request for a basic CPR training session for our neighborhood group.</p>
-                    <div class="request-meta">
-                        <span><i class="fas fa-calendar"></i>Requested for Aug 15</span>
-                        <span><i class="fas fa-users"></i>15 participants</span>
-                    </div>
-                    <div class="request-status pending">
-                        <i class="fas fa-clock"></i>
-                        Pending Response
-                    </div>
-                </div>
-                <div class="request-card">
-                    <h3>Safety Assessment</h3>
-                    <p>Request for a home safety assessment and emergency preparedness plan.</p>
-                    <div class="request-meta">
-                        <span><i class="fas fa-calendar"></i>Requested for Aug 20</span>
-                        <span><i class="fas fa-home"></i>Home Visit</span>
-                    </div>
-                    <div class="request-status approved">
-                        <i class="fas fa-check-circle"></i>
-                        Approved
-                    </div>
-                </div>
+            <div class="request-status pending">
+              <i class="fas fa-clock"></i>
+              Pending Response
             </div>
-        </section>
+          </div>
+          <div class="request-card">
+            <h3>Safety Assessment</h3>
+            <p>
+              Request for a home safety assessment and emergency preparedness
+              plan.
+            </p>
+            <div class="request-meta">
+              <span><i class="fas fa-calendar"></i>Requested for Aug 20</span>
+              <span><i class="fas fa-home"></i>Home Visit</span>
+            </div>
+            <div class="request-status approved">
+              <i class="fas fa-check-circle"></i>
+              Approved
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <!-- Volunteer Opportunities -->
-        <section class="volunteer-opportunities">
-            <div class="section-header">
-                <h2>Volunteer Opportunities</h2>
-                <a href="#" class="view-all">View All</a>
+      <!-- Volunteer Opportunities -->
+      <section class="volunteer-opportunities">
+        <div class="section-header">
+          <h2>Volunteer Opportunities</h2>
+          <a href="#" class="view-all">View All</a>
+        </div>
+        <div class="event-cards">
+          <div class="event-card">
+            <div class="event-date">
+              <span class="day">25</span>
+              <span class="month">Aug</span>
             </div>
-            <div class="event-cards">
-                <div class="event-card">
-                    <div class="event-date">
-                        <span class="day">25</span>
-                        <span class="month">Aug</span>
-                    </div>
-                    <div class="event-details">
-                        <h3>Community Emergency Response Training</h3>
-                        <p><i class="fas fa-map-marker-alt"></i>Community Center</p>
-                        <p><i class="fas fa-clock"></i>9:00 AM - 3:00 PM</p>
-                    </div>
-                    <button class="event-action-btn">Sign Up</button>
-                </div>
-                <div class="event-card">
-                    <div class="event-date">
-                        <span class="day">28</span>
-                        <span class="month">Aug</span>
-                    </div>
-                    <div class="event-details">
-                        <h3>Fire Safety Awareness Day</h3>
-                        <p><i class="fas fa-map-marker-alt"></i>Local Fire Station</p>
-                        <p><i class="fas fa-clock"></i>10:00 AM - 2:00 PM</p>
-                    </div>
-                    <button class="event-action-btn">Sign Up</button>
-                </div>
+            <div class="event-details">
+              <h3>Community Emergency Response Training</h3>
+              <p><i class="fas fa-map-marker-alt"></i>Community Center</p>
+              <p><i class="fas fa-clock"></i>9:00 AM - 3:00 PM</p>
             </div>
-        </section>
+            <button class="event-action-btn">Sign Up</button>
+          </div>
+          <div class="event-card">
+            <div class="event-date">
+              <span class="day">28</span>
+              <span class="month">Aug</span>
+            </div>
+            <div class="event-details">
+              <h3>Fire Safety Awareness Day</h3>
+              <p><i class="fas fa-map-marker-alt"></i>Local Fire Station</p>
+              <p><i class="fas fa-clock"></i>10:00 AM - 2:00 PM</p>
+            </div>
+            <button class="event-action-btn">Sign Up</button>
+          </div>
+        </div>
+      </section>
     </main>
 
     <!-- Include Modal Component -->
@@ -150,18 +158,18 @@
     <!-- Scripts -->
     <script src="config/local-key.js"></script>
     <script>
-    if (!document.querySelector('script[data-gmaps]')) {
-      const gmaps = document.createElement('script');
-      gmaps.src =
-        `https://maps.googleapis.com/maps/api/js?key=${window.GMAPS_KEY}` +
-        `&libraries=places&callback=initMap`;
-      gmaps.async = true;
-      gmaps.defer = true;
-      gmaps.setAttribute('data-gmaps', '');
-      document.head.appendChild(gmaps);
-    }
+      if (!document.querySelector("script[data-gmaps]")) {
+        const gmaps = document.createElement("script");
+        gmaps.src =
+          `https://maps.googleapis.com/maps/api/js?key=${window.GMAPS_KEY}` +
+          `&libraries=places&callback=initMap`;
+        gmaps.async = true;
+        gmaps.defer = true;
+        gmaps.setAttribute("data-gmaps", "");
+        document.head.appendChild(gmaps);
+      }
     </script>
     <script src="js/modal.js" type="module"></script>
-</body>
-
+    <script src="js/dynamic-community-cards.js" type="module"></script>
+  </body>
 </html>
